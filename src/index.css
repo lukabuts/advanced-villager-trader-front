@@ -1,1 +1,178 @@
 @import "tailwindcss";
+
+:root {
+  --bg: #f4f1ec;
+  --bg-2: #edeae3;
+  --bg-3: #e4e0d7;
+  --panel: #faf8f4;
+  --panel-2: #f0ede6;
+  --border: #d6cfbf;
+  --border-light: #e2ddd4;
+  --emerald: #4a7c59;
+  --emerald-dark: #355a40;
+  --emerald-light: #e8f2ec;
+  --gold: #8a6e2f;
+  --red: #9b4040;
+  --red-dark: #7a3030;
+  --red-light: #f5eaea;
+  --content: #2c2a25;
+  --content-dim: #6b6560;
+  --content-muted: #9e9890;
+}
+
+.dark {
+  --bg: #1a1c19;
+  --bg-2: #212420;
+  --bg-3: #292c28;
+  --panel: #232620;
+  --panel-2: #2a2e29;
+  --border: #363a34;
+  --border-light: #404540;
+  --emerald: #5a9e6f;
+  --emerald-dark: #3d7050;
+  --emerald-light: #1e2e22;
+  --gold: #c0962a;
+  --red: #b85050;
+  --red-dark: #8a3a3a;
+  --red-light: #2a1e1e;
+  --content: #ddd8cc;
+  --content-dim: #8a8880;
+  --content-muted: #5a5855;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-bg-3: var(--bg-3);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-border: var(--border);
+  --color-border-light: var(--border-light);
+  --color-emerald: var(--emerald);
+  --color-emerald-dark: var(--emerald-dark);
+  --color-emerald-light: var(--emerald-light);
+  --color-gold: var(--gold);
+  --color-red: var(--red);
+  --color-red-dark: var(--red-dark);
+  --color-red-light: var(--red-light);
+  --color-content: var(--content);
+  --color-content-dim: var(--content-dim);
+  --color-content-muted: var(--content-muted);
+
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "Lora", serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-content font-sans;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply font-sans text-[13px] font-medium px-4 py-2 rounded-md border cursor-pointer
+           transition-all duration-150 active:translate-y-px;
+  }
+  .btn-emerald {
+    @apply bg-emerald text-white border-emerald-dark
+           hover:bg-emerald-dark shadow-sm;
+  }
+  .btn-stone {
+    @apply bg-bg-2 text-content-dim border-border
+           hover:bg-bg-3 hover:text-content;
+  }
+  .btn-red {
+    @apply bg-red text-white border-red-dark hover:bg-red-dark;
+  }
+  .btn-sm {
+    @apply text-xs px-3 py-1.5;
+  }
+  .btn-xs {
+    @apply text-[11px] px-2 py-1;
+  }
+
+  .panel {
+    @apply bg-panel border border-border rounded-[10px] p-4;
+  }
+  .panel-title {
+    @apply font-serif text-[13px] font-semibold text-content
+           mb-3 pb-2 border-b border-border-light flex items-center gap-1.5;
+  }
+
+  .villager-card {
+    @apply bg-panel border border-border rounded-[10px] relative overflow-hidden
+           transition-all duration-150
+           hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  .form-input {
+    @apply w-full bg-bg-2 border border-border rounded-md text-content
+           font-sans text-sm px-3 py-2 outline-none transition-all duration-150
+           focus:border-emerald focus:ring-2 focus:ring-emerald/15
+           placeholder:text-content-muted;
+  }
+  .form-label {
+    @apply text-[11px] font-semibold text-content-dim uppercase tracking-wider;
+  }
+
+  .chip {
+    @apply font-sans text-xs font-medium px-2.5 py-1 rounded-full
+           border border-border bg-bg-2 text-content-dim cursor-pointer
+           transition-all duration-150
+           hover:border-emerald hover:text-emerald hover:bg-emerald-light;
+  }
+  .chip-active {
+    @apply bg-emerald border-emerald-dark text-white;
+  }
+
+  .filter-tag {
+    @apply inline-flex items-center gap-1.5 bg-panel border border-border
+           rounded-md px-2.5 py-1 text-xs text-content-dim;
+  }
+
+  .stat-row {
+    @apply flex justify-between items-center py-1.5
+           border-b border-border-light last:border-0 text-sm;
+  }
+
+  .trade-item {
+    @apply flex items-center justify-between gap-2 px-2 py-1.5
+           bg-bg-2 rounded-md border border-border-light text-sm;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/70 backdrop-blur-sm z-[200]
+           flex items-center justify-center p-5
+           opacity-0 pointer-events-none transition-opacity duration-200;
+  }
+  .modal-overlay-open {
+    @apply opacity-100 pointer-events-auto;
+  }
+  .modal {
+    @apply bg-panel border border-border rounded-xl w-full max-w-[560px]
+           max-h-[90vh] overflow-y-auto
+           translate-y-3 scale-[0.99] transition-transform duration-200;
+  }
+  .modal-open {
+    @apply translate-y-0 scale-100;
+  }
+
+  .grass-strip {
+    @apply h-px;
+    background-image: linear-gradient(90deg, #3d7050, #5a9e6f, #3d7050);
+    background-size: 200% 100%;
+  }
+
+  .notification {
+    @apply fixed bottom-5 right-5 bg-panel border border-emerald rounded-lg
+           px-4 py-3 text-[13px] font-medium text-emerald-dark z-[300]
+           max-w-[280px] translate-x-full transition-transform duration-300;
+  }
+  .notification-show {
+    @apply translate-x-0;
+  }
+  .notification-error {
+    @apply border-red text-red;
+  }
+}
