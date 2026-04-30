@@ -28,21 +28,25 @@ export default function NotFound() {
         </div>
 
         <div className="relative bg-panel border border-border rounded-[10px] px-4 py-3 mb-6 min-h-12 min-w-65 flex items-center justify-center">
-          <p className="font-sans text-sm text-content-dim italic m-0 min-h-5">
+          <p className="font-mojangles text-sm text-content-dim italic m-0 min-h-5">
             {line}
           </p>
         </div>
 
-        <h1 className="font-serif text-[clamp(20px,4vw,26px)] font-semibold text-content mb-2 tracking-tight">
+        <h1 className="font-press-start-2p text-[clamp(20px,4vw,26px)] font-semibold text-content mb-2 tracking-tight">
           Page not found
         </h1>
-        <p className="font-sans text-sm text-content-muted leading-relaxed mb-8">
+        <p className="font-mojangles text-sm text-content-dim leading-relaxed mb-8">
           This corner of the trading hall doesn't exist.
           <br />
           Maybe the villager moved. Maybe it never did.
         </p>
 
-        <Button variant="link" onClick={goBack}>
+        <Button
+          className="font-press-start-2p text-xs"
+          variant="link"
+          onClick={goBack}
+        >
           <ArrowLeft size={15} />
           Go Back
         </Button>
