@@ -7,7 +7,7 @@ import bgXLarge from "@/assets/images/bg/bg_movie_2560x1440.png";
 
 const GameMenuLayout = () => {
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div className="relative h-screen overflow-hidden select-none">
       {/* Responsive background image */}
       <img
         src={bgMedium}

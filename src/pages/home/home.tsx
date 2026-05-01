@@ -7,33 +7,34 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <>
-      <div className="flex flex-col absolute inset-0 items-center gap-2">
-        <div className="flex flex-col items-center sm:mt-60 mt-72 mb-10 select-none">
+      <div className="flex flex-col absolute inset-0 items-center gap-10 mt-60">
+        <div className="flex flex-col items-center select-none">
           <img
             src={minecraft_logo}
             alt="Minecraft Logo"
-            className="w-full px-5 max-w-200 h-auto "
+            className="w-full px-4 max-w-200 h-auto "
           />
           <span
-            className="minecraft-subtitle font-mojangles md:text-4xl text-2xl tracking-wider text-minecraft drop-shadow-[0_4px_6px_rgba(0,0,0,0.9)]
-             [text-shadow:2px_2px_rgba(0,0,0,0.67)]
-             inline-block origin-center font-bold tilted-text "
+            className="font-mojangles sm:text-4xl text-2xl tracking-wider text-mc
+             inline-block origin-center tilted-text subtitle-stroke font-extrabold"
           >
             {APP_SUBTITLE}
           </span>
         </div>
-        <MinecraftButton
-          label="Singleplayer"
-          onClick={() => {
-            navigate(ROUTES.SINGLEPLAYER);
-          }}
-        />
-        <MinecraftButton
-          label="Multiplayer"
-          onClick={() => {
-            navigate(ROUTES.MULTIPLAYER);
-          }}
-        />
+        <div className="flex flex-col gap-2 px-4">
+          <MinecraftButton
+            label="Singleplayer"
+            onClick={() => {
+              navigate(ROUTES.SINGLEPLAYER);
+            }}
+          />
+          <MinecraftButton
+            label="Multiplayer"
+            onClick={() => {
+              navigate(ROUTES.MULTIPLAYER);
+            }}
+          />
+        </div>
       </div>
     </>
   );
