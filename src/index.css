@@ -18,7 +18,7 @@
   --content: #2c2a25;
   --content-dim: #6b6560;
   --content-muted: #9e9890;
-  --minecraft: #d0c5c0;
+  --mc: #aaaaaa;
 }
 
 .dark {
@@ -59,7 +59,8 @@
   --color-content: var(--content);
   --color-content-dim: var(--content-dim);
   --color-content-muted: var(--content-muted);
-  --color-minecraft: var(--minecraft);
+  --color-mc: var(--mc);
+  --shadow-co
 
   --font-sans: "DM Sans", sans-serif;
   --font-serif: "Lora", serif;
@@ -87,6 +88,37 @@
   body {
     @apply bg-bg text-content font-sans;
   }
+
+  @keyframes wave {
+    0%   { transform: translateX(-100%); }
+    100% { transform: translateX(250%); }
+  }
+}
+
+@layer utilities {
+  .mc-scrollbar::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  .mc-scrollbar::-webkit-scrollbar-track {
+    background: #000000;
+  }
+
+  .mc-scrollbar::-webkit-scrollbar-thumb {
+    background: #8b8b8b;
+    border: none;
+    border-radius: 0;
+  }
+
+  .mc-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #aaaaaa;
+  }
+
+ @media (width <= 40rem ) {
+    .mc-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+    }
 }
 
 @layer components {
@@ -194,4 +226,15 @@
     transform: perspective(300px) scaleY(1) rotateX(15deg);
     transform-style: preserve-3d;
   }
+
+  .double-b-shadow {
+    box-shadow: 0 0 0 2px black, 0 0 0 4px #999;
+  }
+
+  .subtitle-stroke{
+      -webkit-text-stroke: 0.1px #2c2c2c;
+      text-shadow: #4b4b4b 2px 3px;
+  }
+
 }
+

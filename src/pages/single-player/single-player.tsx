@@ -1,5 +1,5 @@
-const SinglePlayer = () => {
+const Singleplayer = () => {
   return <div>single-player</div>;
 };
 
-export default SinglePlayer;
+export default Singleplayer;

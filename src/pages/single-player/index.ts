@@ -1,1 +1,1 @@
-export { default as SinglePlayer } from "./single-player";
+export { default as Singleplayer } from "./single-player";

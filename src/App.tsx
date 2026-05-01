@@ -1,14 +1,18 @@
+import { Suspense } from "react";
 import { RouterProvider } from "react-router-dom";
-import { router } from "@/routes";
 import { Helmet } from "react-helmet-async";
-import { APP_NAME } from "./constants";
+import { router } from "@/routes";
+import { APP_NAME } from "@/constants";
+import { LoadingScreen } from "@/components/ui";
 
 function App() {
   return (
     <>
       <Helmet defaultTitle={APP_NAME} />
 
-      <RouterProvider router={router} />
+      <Suspense fallback={<LoadingScreen />}>
+        <RouterProvider router={router} />
+      </Suspense>
     </>
   );
 }
