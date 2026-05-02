@@ -11,7 +11,7 @@ export const router = createBrowserRouter([
       { path: ROUTES.HOME, element: <Home /> },
       {
         path: ROUTES.SINGLEPLAYER,
-        element: <SelectWorld mode="singleplayer" />,
+        element: <SelectWorld />,
       },
     ],
   },
