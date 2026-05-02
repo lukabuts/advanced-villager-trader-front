@@ -3,11 +3,9 @@ import { Header } from "@/components/layout";
 
 export default function AppLayout() {
   return (
-    <>
+    <div className="overflow-hidden">
       <Header />
-      <main>
-        <Outlet />
-      </main>
-    </>
+      <Outlet />
+    </div>
   );
 }

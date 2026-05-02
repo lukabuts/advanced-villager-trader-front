@@ -1,3 +1,5 @@
+import type { Profession } from "@/constants";
+
 export interface Trade {
   id: string;
   name: string;
@@ -8,7 +10,7 @@ export interface Trade {
 export interface Villager {
   id: string;
   name: string;
-  profession: string;
+  profession: Profession;
   notes: string;
   dead: boolean;
   killedAt?: number;
