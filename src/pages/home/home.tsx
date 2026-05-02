@@ -15,7 +15,7 @@ const Home = () => {
             className="w-full px-4 max-w-200 h-auto "
           />
           <span
-            className="font-mojangles sm:text-4xl text-2xl tracking-wider text-mc
+            className="font-press-start-2p sm:text-4xl text-xl tracking-wider text-mc
              inline-block origin-center tilted-text subtitle-stroke font-extrabold"
           >
             {APP_SUBTITLE}

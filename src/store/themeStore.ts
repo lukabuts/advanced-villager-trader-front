@@ -1,4 +1,4 @@
-import { LOCAL_STORAGE_KEYS } from "@/constants/localstorage";
+import { LOCAL_STORAGE_KEYS } from "@/constants";
 import type { Theme, ThemeStore } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
