@@ -64,6 +64,7 @@ const SelectWorld = () => {
             <h1>Select World</h1>
           </MinecraftText>
           <MinecraftSearchInput
+            className="w-full"
             placeholder="Search"
             initialValue={filter}
             onChange={(v) => setFilter(v.trim())}
@@ -72,12 +73,19 @@ const SelectWorld = () => {
 
         <div className="bg-black/40 backdrop-blur-md w-full flex justify-center double-b-shadow h-full sm:max-h-[calc(100vh-17rem)] max-h-[calc(100dvh-22rem)]">
           <div className="max-w-2xl w-full px-4 py-2 flex flex-col gap-1 overflow-y-auto mc-scrollbar">
-            {filteredWorlds.length === 0 ? (
+            {worlds.length === 0 ? (
               <MinecraftText
                 style="gray"
                 className="text-center mt-4 text-base"
               >
                 No worlds found. Create a new world to get started!
+              </MinecraftText>
+            ) : filteredWorlds.length === 0 ? (
+              <MinecraftText
+                style="gray"
+                className="text-center mt-4 text-base"
+              >
+                No worlds found matching your search.
               </MinecraftText>
             ) : (
               filteredWorlds.map((w) => (

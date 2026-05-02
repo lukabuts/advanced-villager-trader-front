@@ -11,7 +11,7 @@ export function SelectWorldCard({
 }: SelectWorldCardProps) {
   return (
     <div
-      className={`flex gap-4 items-center p-0.5 cursor-pointer border-2  ${isSelected ? "border-white" : "hover:border-white border-transparent"}`}
+      className={`flex gap-4 items-center p-0.5 cursor-pointer border-2  ${isSelected ? "border-white bg-black/50" : "hover:border-white border-transparent"}`}
       onClick={onSelect}
     >
       <div

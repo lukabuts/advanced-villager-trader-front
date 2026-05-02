@@ -15,7 +15,7 @@ export function MinecraftSearchInput({
   const [name, setName] = useState(initialValue || "");
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className={cn("flex flex-col gap-1", className)}>
       <input
         type="text"
         autoFocus={autoFocus}

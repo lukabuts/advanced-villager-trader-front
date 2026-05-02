@@ -2,7 +2,8 @@ import type { World } from "./world";
 
 export interface MinecraftTextProps {
   children: React.ReactNode;
-  style?: "white" | "gray";
+  style?: "white" | "gray" | "green";
+  shadow?: boolean;
   className?: string;
 }
 
@@ -54,4 +55,8 @@ export interface ModalProps {
   onCancel?: () => void;
   onClose?: () => void;
   children: React.ReactNode;
+}
+
+export interface ThemeToggleProps {
+  className?: string;
 }

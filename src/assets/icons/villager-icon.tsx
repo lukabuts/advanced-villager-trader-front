@@ -1,4 +1,4 @@
-const VillagerIcon = ({ className }: { className: string }) => {
+const VillagerIcon = ({ className }: { className?: string }) => {
   return (
     <svg
       className={className}
