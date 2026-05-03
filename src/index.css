@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@variant dark (&:where(.dark, .dark *));
 :root {
   --bg: #f4f1ec;
   --bg-2: #edeae3;
@@ -132,7 +132,7 @@
            transition-all duration-150 active:translate-y-px;
   }
   .btn-emerald {
-    @apply bg-emerald text-white border-emerald-dark
+    @apply bg-emerald text-white dark:border-emerald-dark
            hover:bg-emerald-dark shadow-sm;
   }
   .btn-stone {
@@ -241,5 +241,9 @@
   .subtitle-stroke {
     -webkit-text-stroke: 0.1px #000000;
     text-shadow: #2e2e2e 2px 3px;
+  }
+
+  .min-h-content-header {
+    min-height: calc(100vh - 70px);
   }
 }

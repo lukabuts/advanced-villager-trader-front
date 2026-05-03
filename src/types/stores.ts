@@ -57,3 +57,9 @@ export interface NotificationStore {
   show: (message: string, type?: NotificationType) => void;
   hide: () => void;
 }
+
+export interface SidebarStore {
+  isOpen: boolean;
+  toggle: () => void;
+  close: () => void;
+}

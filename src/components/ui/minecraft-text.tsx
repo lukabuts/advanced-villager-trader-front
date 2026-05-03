@@ -17,7 +17,7 @@ export function MinecraftText({
           : style === "gray"
             ? "text-[#aaaaaa] [text-shadow:2px_2px_#2a2a2a]"
             : style === "green"
-              ? "text-emerald [text-shadow:2px_2px_#146414]"
+              ? "text-emerald dark:[text-shadow:2px_2px_#146414] text-shadow-lg"
               : "",
         className,
       )}

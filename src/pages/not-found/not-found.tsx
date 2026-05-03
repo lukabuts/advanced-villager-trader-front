@@ -4,8 +4,15 @@ import { ArrowLeft } from "lucide-react";
 import { useGoBack } from "@/hooks";
 import { useState } from "react";
 import { Button } from "@/components/ui";
+import { cn } from "@/lib/utils";
 
-export default function NotFound() {
+export default function NotFound({
+  type = "page",
+  className,
+}: {
+  type?: "page" | "world";
+  className?: string;
+}) {
   const [line] = useState(
     () => VILLAGER_LINES[Math.floor(Math.random() * VILLAGER_LINES.length)],
   );
@@ -13,7 +20,13 @@ export default function NotFound() {
   const goBack = useGoBack();
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bg relative overflow-hidden">
+    <div
+      className={cn(
+        "flex items-center justify-center bg-bg relative overflow-hidden",
+        type === "page" ? "min-h-screen" : "min-h-content-header",
+        className,
+      )}
+    >
       <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_20%_30%,rgba(90,158,111,0.04),transparent_50%),radial-gradient(circle_at_80%_70%,rgba(138,110,74,0.04),transparent_50%)]" />
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 py-10 max-w-md w-full">
@@ -34,7 +47,7 @@ export default function NotFound() {
         </div>
 
         <h1 className="font-press-start-2p text-[clamp(20px,4vw,26px)] font-semibold text-content mb-2 tracking-tight">
-          Page not found
+          {type === "page" ? "Page not found" : "World not found"}
         </h1>
         <p className="font-mojangles text-sm text-content-dim leading-relaxed mb-8">
           This corner of the trading hall doesn't exist.
