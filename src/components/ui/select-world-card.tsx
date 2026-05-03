@@ -1,8 +1,7 @@
 import type { SelectWorldCardProps } from "@/types";
-import { Play } from "lucide-react";
 import { MinecraftText } from "./minecraft-text";
 import grassBlock from "@/assets/images/grass_block_2d_70X70.jpeg";
-
+import playBtn from "@/assets/images/mc_play_icon.png";
 export function SelectWorldCard({
   world,
   isSelected,
@@ -11,18 +10,20 @@ export function SelectWorldCard({
 }: SelectWorldCardProps) {
   return (
     <div
-      className={`flex gap-4 items-center p-0.5 cursor-pointer border-2  ${isSelected ? "border-white bg-black/50" : "hover:border-white border-transparent"}`}
+      className={`flex group gap-4 items-center p-0.5 cursor-pointer border-2  ${isSelected ? "border-white bg-black/50" : "hover:border-white border-transparent"}`}
       onClick={onSelect}
     >
       <div
-        className="group relative"
+        className="relative"
         onClick={(e) => {
           e.stopPropagation();
           navigateToWorld(world.id);
         }}
       >
-        <button className="hidden group-hover:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer bg-black/20 size-16  items-center justify-center">
-          <Play className="size-12 text-mc" />
+        <button
+          className={`${isSelected ? "flex" : "hidden"} group-hover:flex absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 cursor-pointer bg-black/40 size-16  items-center justify-center`}
+        >
+          <img src={playBtn} alt="Play" className="h-12" />
         </button>
         <img src={grassBlock} alt="Grass Block" className="size-16" />
       </div>

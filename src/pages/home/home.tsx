@@ -2,11 +2,15 @@ import { APP_SUBTITLE, ROUTES } from "@/constants";
 import { useNavigate } from "react-router-dom";
 import { MinecraftButton } from "@/components/ui";
 import minecraft_logo from "@/assets/images/minecraft_transparent_logo.png";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <>
+      <Helmet>
+        <link rel="preload" as="image" href={minecraft_logo} />
+      </Helmet>
       <div className="flex flex-col absolute inset-0 items-center gap-10 mt-60">
         <div className="flex flex-col items-center select-none">
           <img

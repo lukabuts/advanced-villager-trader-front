@@ -1,6 +1,7 @@
 import { useModalStore } from "@/store/modalStore";
 import { MinecraftButton } from "@/components/ui";
 import type { ModalProps } from "@/types";
+import { XIcon } from "lucide-react";
 
 export function Modal({
   title,
@@ -22,14 +23,20 @@ export function Modal({
       onClick={closeModal}
     >
       <div
-        className="bg-panel border-2 border-border w-full max-w-sm"
+        className="bg-panel border-2 border-border w-full max-w-sm animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-4 border-b border-border font-mojangles text-white">
-          {title}
+        <div className="p-4 border-b border-border font-mojangles text-white flex items-center justify-between">
+          <p className="text-lg">{title}</p>
+          <button
+            className="btn btn-stone p-1 hover:border-red-900"
+            onClick={closeModal}
+          >
+            <XIcon size={20} />
+          </button>
         </div>
-        <div className="p-4 pb-2">{children}</div>
-        <div className="p-4 pt-2 flex gap-2">
+        <div className="p-4 pb-3">{children}</div>
+        <div className="p-4 pt-1 flex gap-2">
           {onConfirm && <MinecraftButton label="Confirm" onClick={onConfirm} />}
           <MinecraftButton
             label="Cancel"
