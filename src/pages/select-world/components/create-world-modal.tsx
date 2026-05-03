@@ -24,7 +24,11 @@ export function CreateWorldModal({ handleClose }: { handleClose: () => void }) {
         initialValue={name}
         autoFocus={true}
         onConfirm={handleCreate}
-        onChange={(v) => setName(v)}
+        onChange={(v) => {
+          const value = v.trim();
+          setName(value);
+          if (createError && value.length > 0) setCreateError(null);
+        }}
         error={createError}
       />
     </Modal>

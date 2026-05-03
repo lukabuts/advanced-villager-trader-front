@@ -6,7 +6,7 @@ import {
 } from "@/components/ui";
 import type { World } from "@/types";
 import { useWorldStore, useModalStore } from "@/store";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { buildRoute, ROUTES } from "@/constants";
 import { useNavigate } from "react-router-dom";
 import {
@@ -37,20 +37,14 @@ const SelectWorld = () => {
   const clearSelection = () => setSelectedWorldId(null);
 
   function openLocalModal(type: ModalType) {
-    console.log("Opening modal:", type);
     open();
     setOpenedModal(type);
   }
 
   function closeLocalModal() {
-    console.log("Closing modal");
     setOpenedModal(null);
     close();
   }
-
-  useEffect(() => {
-    console.log("Opened modal changed:", openedModal);
-  }, [openedModal]);
 
   const navigateToWorld = (worldId: World["id"]) => {
     navigate(buildRoute(ROUTES.SINGLEPLAYER_WORLD, { worldId }));

@@ -20,7 +20,7 @@ const Singleplayer = () => {
   if (!world) return <NotFound type="world" />;
 
   return (
-    <main className="max-w-350 my-0 mx-auto py-3 sm:px-6 px-3 grid grid-cols-[270px_1fr] gap-3 min-h-content-header">
+    <>
       <Sidebar
         availableProfessions={availableProfessions}
         activeProfessions={professions}
@@ -28,7 +28,7 @@ const Singleplayer = () => {
         searchValue={search}
         onSearchChange={setSearch}
       />
-    </main>
+    </>
   );
 };
 

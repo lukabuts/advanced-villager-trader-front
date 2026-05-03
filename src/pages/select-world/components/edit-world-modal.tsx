@@ -32,7 +32,11 @@ export function EditWorldModal({
         placeholder="World Name"
         autoFocus={true}
         initialValue={name}
-        onChange={(v) => setName(v)}
+        onChange={(v) => {
+          const value = v.trim();
+          setName(value);
+          if (editError && value.length > 0) setEditError(null);
+        }}
         onConfirm={handleEdit}
         error={editError}
       />
