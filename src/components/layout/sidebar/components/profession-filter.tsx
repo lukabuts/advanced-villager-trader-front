@@ -1,43 +1,35 @@
-import { PROF_EMOJI, PROFESSIONS } from "@/constants";
-import { cn } from "@/lib/utils";
+import { FilterProfBtn } from "@/components/ui";
+import { PROF_EMOJI } from "@/constants";
+import type { ProfessionFilterProps } from "@/types";
 
-export function ProfessionFilter() {
+export function ProfessionFilter({
+  availableProfessions,
+  activeProfessions,
+  handleProfessionChange,
+}: ProfessionFilterProps) {
   return (
-    <div className="bg-panel border border-border rounded-[10px] p-4 shadow-[0_1px_4px_rgba(0,0,0,0.05)]">
-      {/* Title */}
-      <div className="font-serif text-[13px] font-semibold text-content mb-3 pb-2 border-b border-border-light flex items-center gap-1.5">
-        👥 Filter by Profession
-      </div>
+    <div className="panel">
+      <div className="panel-title">👥 Filter by Profession</div>
 
-      {/* Chips */}
       <div className="flex flex-wrap gap-1.5">
-        <button
-          key="all"
-          className={cn(
-            "font-sans text-xs font-medium px-2.5 py-1 rounded-full",
-            "border transition-all duration-150 cursor-pointer",
-            "bg-emerald border-emerald-dark text-white",
-          )}
+        {/* All button */}
+        <FilterProfBtn
+          onClick={() => handleProfessionChange("all")}
+          active={activeProfessions === "all"}
         >
           All
-        </button>
-        {PROFESSIONS.map((prof) => {
-          const emoji = PROF_EMOJI[prof];
+        </FilterProfBtn>
 
-          return (
-            <button
-              key={prof}
-              //   onClick={() => onChange(isAll ? "all" : prof)}
-              className={cn(
-                "font-sans text-xs font-medium px-2.5 py-1 rounded-full",
-                "border transition-all duration-150 cursor-pointer",
-                "bg-bg-2 border-border text-content-dim hover:border-emerald hover:text-emerald hover:bg-emerald-light",
-              )}
-            >
-              {emoji} {prof}
-            </button>
-          );
-        })}
+        {/* Only available professions */}
+        {availableProfessions.map((prof) => (
+          <FilterProfBtn
+            onClick={() => handleProfessionChange(prof)}
+            active={activeProfessions.includes(prof)}
+            key={prof}
+          >
+            {PROF_EMOJI[prof]} {prof}
+          </FilterProfBtn>
+        ))}
       </div>
     </div>
   );

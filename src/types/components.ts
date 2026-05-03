@@ -1,3 +1,4 @@
+import type { Profession } from "@/constants";
 import type { World } from "./world";
 
 export interface MinecraftTextProps {
@@ -58,5 +59,27 @@ export interface ModalProps {
 }
 
 export interface ThemeToggleProps {
+  className?: string;
+}
+
+export interface FilterProfBtnProps {
+  onClick: () => void;
+  active: boolean;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface ProfessionFilterProps {
+  availableProfessions: Profession[];
+  activeProfessions: Profession[] | "all";
+  handleProfessionChange: (profession: Profession | "all") => void;
+}
+
+export interface SearchTradesProps {
+  onSearchChange: (search: string) => void;
+  searchValue: string;
+  className?: string;
+}
+export interface SidebarProps extends ProfessionFilterProps, SearchTradesProps {
   className?: string;
 }

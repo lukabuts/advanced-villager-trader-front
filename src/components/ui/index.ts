@@ -9,3 +9,4 @@ export * from "./modal";
 export * from "./minecraft-search-input";
 export * from "./input-error";
 export * from "./notification";
+export * from "./filter-prof-btn";
