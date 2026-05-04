@@ -1,6 +1,6 @@
 import { FilterProfBtn } from "@/components/ui";
 import { PROF_EMOJI } from "@/constants";
-import type { ProfessionFilterProps } from "@/types";
+import type { ProfessionFilterProps } from "./types";
 
 export function ProfessionFilter({
   availableProfessions,

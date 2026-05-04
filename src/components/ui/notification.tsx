@@ -3,6 +3,7 @@ import { useNotificationStore } from "@/store/notificationStore";
 export function Notification() {
   const { message, type, visible, hide } = useNotificationStore();
 
+  if (!visible) return null;
   return (
     <div
       onClick={hide}

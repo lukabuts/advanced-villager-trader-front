@@ -1,4 +1,3 @@
-import type { Profession } from "@/constants";
 import type { World } from "./world";
 
 export interface MinecraftTextProps {
@@ -9,7 +8,7 @@ export interface MinecraftTextProps {
 }
 
 export interface MinecraftButtonProps {
-  label: string;
+  label?: string;
   onClick: () => void;
   className?: string;
   disabled?: boolean;
@@ -69,17 +68,15 @@ export interface FilterProfBtnProps {
   className?: string;
 }
 
-export interface ProfessionFilterProps {
-  availableProfessions: Profession[];
-  activeProfessions: Profession[] | "all";
-  handleProfessionChange: (profession: Profession | "all") => void;
+export interface SidebarProps {
+  world: World;
+  className?: string;
 }
 
-export interface SearchTradesProps {
-  onSearchChange: (search: string) => void;
-  searchValue: string;
-  className?: string;
-}
-export interface SidebarProps extends ProfessionFilterProps, SearchTradesProps {
-  className?: string;
+export interface WorldModalWrapperProps {
+  onCancel: () => void;
+  onSubmit: () => void;
+  label: string;
+  children: React.ReactNode;
+  title: string;
 }

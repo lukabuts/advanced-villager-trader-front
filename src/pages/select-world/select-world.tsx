@@ -15,8 +15,6 @@ import {
   CreateWorldModal,
 } from "./components";
 
-type ModalType = "delete" | "edit" | "create";
-
 const SelectWorld = () => {
   const navigate = useNavigate();
 
@@ -24,9 +22,8 @@ const SelectWorld = () => {
     null,
   );
   const [filter, setFilter] = useState("");
-  const [openedModal, setOpenedModal] = useState<ModalType | null>(null);
   const { worlds } = useWorldStore();
-  const { open, close } = useModalStore();
+  const { open } = useModalStore();
 
   const selectedWorld = worlds.find((w) => w.id === selectedWorldId) ?? null;
 
@@ -34,21 +31,10 @@ const SelectWorld = () => {
     .filter((w) => w.name.toLowerCase().includes(filter.toLowerCase()))
     .sort((a, b) => b.createdAt - a.createdAt);
 
-  const clearSelection = () => setSelectedWorldId(null);
-
-  function openLocalModal(type: ModalType) {
-    open();
-    setOpenedModal(type);
-  }
-
-  function closeLocalModal() {
-    setOpenedModal(null);
-    close();
-  }
-
   const navigateToWorld = (worldId: World["id"]) => {
     navigate(buildRoute(ROUTES.SINGLEPLAYER_WORLD, { worldId }));
   };
+  const clearSelection = () => setSelectedWorldId(null);
 
   return (
     <>
@@ -65,7 +51,7 @@ const SelectWorld = () => {
           />
         </div>
 
-        <div className="bg-black/40 backdrop-blur-md w-full flex justify-center double-b-shadow h-full sm:max-h-[calc(100vh-17rem)] max-h-[calc(100dvh-22rem)]">
+        <div className="bg-black/40 backdrop-blur-md w-full flex justify-center double-b-shadow h-full sm:max-h-[calc(100vh-17.5rem)] max-h-[calc(100dvh-22rem)]">
           <div className="max-w-2xl w-full px-4 py-2 flex flex-col gap-1 overflow-y-auto mc-scrollbar">
             {worlds.length === 0 ? (
               <MinecraftText
@@ -100,32 +86,25 @@ const SelectWorld = () => {
         <SelectWorldBtns
           selectedWorldId={selectedWorldId}
           navigateToWorld={navigateToWorld}
-          onDelete={() => openLocalModal("delete")}
-          onEdit={() => openLocalModal("edit")}
-          onCreate={() => openLocalModal("create")}
+          onDelete={() =>
+            open(
+              <DeleteWorldModal
+                selectedWorld={selectedWorld}
+                clearSelection={clearSelection}
+              />,
+            )
+          }
+          onEdit={() =>
+            open(
+              <EditWorldModal
+                selectedWorld={selectedWorld}
+                clearSelection={clearSelection}
+              />,
+            )
+          }
+          onCreate={() => open(<CreateWorldModal />)}
         />
       </div>
-
-      {/* Modals */}
-      {openedModal === "create" ? (
-        <CreateWorldModal handleClose={closeLocalModal} />
-      ) : (
-        selectedWorld &&
-        (openedModal === "delete" ? (
-          <DeleteWorldModal
-            selectedWorld={selectedWorld}
-            selectedWorldName={selectedWorld.name}
-            clearSelection={clearSelection}
-            handleClose={closeLocalModal}
-          />
-        ) : openedModal === "edit" ? (
-          <EditWorldModal
-            selectedWorld={selectedWorld}
-            clearSelection={clearSelection}
-            handleClose={closeLocalModal}
-          />
-        ) : null)
-      )}
     </>
   );
 };

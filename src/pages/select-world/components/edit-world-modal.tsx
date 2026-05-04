@@ -1,45 +1,40 @@
-import { MinecraftSearchInput, Modal } from "@/components/ui";
-import { useWorldStore } from "@/store";
-import type { World } from "@/types";
-import { useState } from "react";
+import { MinecraftSearchInput, WorldModalWrapper } from "@/components/ui";
+import { useModalStore, useWorldStore } from "@/store";
+import type { WorldModalProps } from "./types";
+import { useWorldNameField } from "@/hooks";
 
 export function EditWorldModal({
   selectedWorld,
   clearSelection,
-  handleClose,
-}: {
-  selectedWorld: World;
-  clearSelection: () => void;
-  handleClose: () => void;
-}) {
-  const [name, setName] = useState(selectedWorld.name);
-  const [editError, setEditError] = useState<string | null>(null);
+}: WorldModalProps) {
+  const { name, error, handleChange, validate } = useWorldNameField(
+    selectedWorld?.name,
+  );
   const { renameWorld } = useWorldStore();
+  const { close } = useModalStore();
+
   const handleEdit = () => {
-    if (!selectedWorld.id || !selectedWorld) return;
-    if (!name.trim()) {
-      setEditError("World name cannot be empty.");
-      return;
-    }
+    if (!selectedWorld?.id || !validate(name)) return;
     renameWorld(selectedWorld.id, name);
     clearSelection();
-    handleClose();
+    close();
   };
 
   return (
-    <Modal title="Edit World" onConfirm={handleEdit} onClose={handleClose}>
+    <WorldModalWrapper
+      title="Edit World"
+      onCancel={close}
+      onSubmit={handleEdit}
+      label="Edit"
+    >
       <MinecraftSearchInput
         placeholder="World Name"
-        autoFocus={true}
+        autoFocus
         initialValue={name}
-        onChange={(v) => {
-          const value = v.trim();
-          setName(value);
-          if (editError && value.length > 0) setEditError(null);
-        }}
+        onChange={handleChange}
         onConfirm={handleEdit}
-        error={editError}
+        error={error}
       />
-    </Modal>
+    </WorldModalWrapper>
   );
 }

@@ -1,36 +1,33 @@
-import { MinecraftSearchInput, Modal } from "@/components/ui";
-import { useWorldStore } from "@/store";
-import { useState } from "react";
+import { MinecraftSearchInput, WorldModalWrapper } from "@/components/ui";
+import { useWorldNameField } from "@/hooks";
+import { useModalStore, useWorldStore } from "@/store";
 
-export function CreateWorldModal({ handleClose }: { handleClose: () => void }) {
-  const [name, setName] = useState("");
-  const [createError, setCreateError] = useState<string | null>(null);
-
+export function CreateWorldModal() {
+  const { name, error, handleChange, validate } = useWorldNameField();
   const { createWorld } = useWorldStore();
+  const { close } = useModalStore();
 
-  function handleCreate() {
-    if (!name.trim()) {
-      setCreateError("World name cannot be empty.");
-      return;
-    }
-    createWorld(name.trim());
-    handleClose();
-  }
+  const handleCreate = () => {
+    if (!validate(name)) return;
+    createWorld(name);
+    close();
+  };
 
   return (
-    <Modal title="Create World" onConfirm={handleCreate} onClose={handleClose}>
+    <WorldModalWrapper
+      title="Create World"
+      onCancel={close}
+      onSubmit={handleCreate}
+      label="Create"
+    >
       <MinecraftSearchInput
         placeholder="World Name"
+        autoFocus
         initialValue={name}
-        autoFocus={true}
         onConfirm={handleCreate}
-        onChange={(v) => {
-          const value = v.trim();
-          setName(value);
-          if (createError && value.length > 0) setCreateError(null);
-        }}
-        error={createError}
+        onChange={handleChange}
+        error={error}
       />
-    </Modal>
+    </WorldModalWrapper>
   );
 }
