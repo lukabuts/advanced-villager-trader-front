@@ -1,32 +1,31 @@
-import { Modal } from "@/components/ui";
-import { useWorldStore } from "@/store";
-import type { World } from "@/types";
+import { useModalStore, useWorldStore } from "@/store";
+import { WorldModalWrapper } from "@/components/ui";
+import type { WorldModalProps } from "./types";
 
 export function DeleteWorldModal({
-  selectedWorldName,
   selectedWorld,
   clearSelection,
-  handleClose,
-}: {
-  selectedWorldName: string;
-  selectedWorld: World;
-  clearSelection: () => void;
-  handleClose: () => void;
-}) {
+}: WorldModalProps) {
+  const { close } = useModalStore();
   const { deleteWorld } = useWorldStore();
   function handleDelete() {
     if (!selectedWorld) return;
     deleteWorld(selectedWorld.id);
     clearSelection();
-    handleClose();
+    close();
   }
   return (
-    <Modal title="Delete World" onConfirm={handleDelete} onClose={handleClose}>
+    <WorldModalWrapper
+      title="Delete World"
+      onCancel={close}
+      onSubmit={handleDelete}
+      label="Delete"
+    >
       <p className="font-mojangles">
         Are you sure you want to delete{" "}
-        <span className="text-white">{selectedWorldName}</span>? This action
+        <span className="text-white">{selectedWorld?.name}</span>? This action
         cannot be undone.
       </p>
-    </Modal>
+    </WorldModalWrapper>
   );
 }

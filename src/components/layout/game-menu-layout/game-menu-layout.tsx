@@ -18,7 +18,7 @@ const GameMenuLayout = () => {
           ${bgXLarge} 2560w
         `}
         sizes="100vw"
-        alt=""
+        alt="background"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover -z-10"
         fetchPriority="high"

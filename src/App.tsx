@@ -3,7 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { router } from "@/routes";
 import { APP_NAME } from "@/constants";
-import { LoadingScreen, Notification } from "@/components/ui";
+import { LoadingScreen, Modal, Notification } from "@/components/ui";
 
 function App() {
   return (
@@ -14,6 +14,7 @@ function App() {
         <RouterProvider router={router} />
       </Suspense>
       <Notification />
+      <Modal />
     </>
   );
 }

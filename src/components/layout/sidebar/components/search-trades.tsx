@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import type { SearchTradesProps } from "@/types";
+import type { SearchTradesProps } from "./types";
 
 export function SearchTrades({
   onSearchChange,

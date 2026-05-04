@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { NotificationType, Theme } from "./app";
 import type { Trade, Villager } from "./villager";
 import type { World } from "./world";
@@ -47,7 +48,8 @@ export interface WorldStore {
 }
 export interface ModalStore {
   isOpen: boolean;
-  open: () => void;
+  content: ReactNode | null;
+  open: (content: ReactNode) => void;
   close: () => void;
 }
 export interface NotificationStore {

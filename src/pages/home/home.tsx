@@ -1,9 +1,9 @@
-import { APP_SUBTITLE, ROUTES } from "@/constants";
+import { ROUTES } from "@/constants";
 import { useNavigate } from "react-router-dom";
 import { MinecraftButton } from "@/components/ui";
 import minecraft_logo from "@/assets/images/minecraft_transparent_logo.png";
 import { Helmet } from "react-helmet-async";
-
+import tradingTrackerLogo from "@/assets/images/trading_tracker_logo.png";
 const Home = () => {
   const navigate = useNavigate();
   return (
@@ -18,12 +18,11 @@ const Home = () => {
             alt="Minecraft Logo"
             className="w-full px-4 max-w-200 h-auto "
           />
-          <span
-            className="font-press-start-2p sm:text-4xl text-xl tracking-wider text-mc
-             inline-block origin-center tilted-text subtitle-stroke font-extrabold"
-          >
-            {APP_SUBTITLE}
-          </span>
+          <img
+            src={tradingTrackerLogo}
+            alt="Trading Tracker Logo"
+            className="w-1/2 h-auto max-w-92"
+          />
         </div>
         <div className="flex flex-col gap-2 px-4">
           <MinecraftButton

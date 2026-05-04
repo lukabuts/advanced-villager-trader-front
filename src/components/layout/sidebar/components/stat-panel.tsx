@@ -1,10 +1,5 @@
 import { cn } from "@/lib/utils";
-
-interface StatRowProps {
-  label: string;
-  value: string | number;
-  valueClassName?: string;
-}
+import type { StatRowProps } from "./types";
 
 function StatRow({ label, value, valueClassName }: StatRowProps) {
   return (
