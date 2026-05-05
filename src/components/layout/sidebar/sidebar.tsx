@@ -34,7 +34,7 @@ const Sidebar = ({ world, className }: SidebarProps) => {
           activeProfessions={professions}
           handleProfessionChange={setProfessions}
         />
-        <StatsPanel />
+        <StatsPanel world={world} />
       </div>
     </aside>
   );

@@ -6,7 +6,7 @@
   --bg-3: #e4e0d7;
   --panel: #faf8f4;
   --panel-2: #f0ede6;
-  --border: #d6cfbf;
+  --border: #d6bfbf;
   --border-light: #e2ddd4;
   --emerald: #4a7c59;
   --emerald-dark: #355a40;
@@ -89,6 +89,10 @@
   }
   body {
     @apply bg-bg text-content font-sans overflow-hidden;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 
   @keyframes wave {

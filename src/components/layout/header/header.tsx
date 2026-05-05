@@ -28,9 +28,6 @@ const Header = () => {
         <button className="btn btn-stone lg:hidden p-2" onClick={toggle}>
           {isOpen ? <XIcon size={20} /> : <Menu size={20} />}
         </button>
-        <button className="max-lg:hidden btn btn-emerald" onClick={() => {}}>
-          + Add Villager
-        </button>
       </div>
     </header>
   );

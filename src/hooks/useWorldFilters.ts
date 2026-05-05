@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import type { Profession } from "@/constants";
 import { PROFESSIONS } from "@/constants";
+import type { VillagerStatus } from "@/types";
 
 export function useWorldFilters() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,6 +12,7 @@ export function useWorldFilters() {
   const professions: Profession[] | "all" = professionsParam
     ? (professionsParam.split(",") as Profession[])
     : "all";
+  const status = (searchParams.get("st") as VillagerStatus | null) ?? "alive";
 
   const setSearch = (value: string) => {
     setSearchParams(
@@ -53,16 +55,36 @@ export function useWorldFilters() {
     );
   };
 
-  const reset = () => {
+  const setStatus = (value: VillagerStatus) => {
     setSearchParams(
       (prev) => {
-        prev.delete("s");
-        prev.delete("p");
+        if (value === "alive") prev.delete("st");
+        else prev.set("st", value);
         return prev;
       },
       { replace: true },
     );
   };
 
-  return { search, professions, setSearch, setProfessions, reset };
+  const reset = () => {
+    setSearchParams(
+      (prev) => {
+        prev.delete("s");
+        prev.delete("p");
+        prev.delete("st");
+        return prev;
+      },
+      { replace: true },
+    );
+  };
+
+  return {
+    search,
+    professions,
+    status,
+    setSearch,
+    setProfessions,
+    setStatus,
+    reset,
+  };
 }
