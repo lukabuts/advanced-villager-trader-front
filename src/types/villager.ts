@@ -17,3 +17,5 @@ export interface Villager {
   trades: Trade[];
   createdAt: number;
 }
+
+export type VillagerStatus = "alive" | "dead";

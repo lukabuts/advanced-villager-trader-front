@@ -68,6 +68,10 @@ export interface FilterProfBtnProps {
   className?: string;
 }
 
+export interface StatsPanelProps {
+  world: World;
+}
+
 export interface SidebarProps {
   world: World;
   className?: string;

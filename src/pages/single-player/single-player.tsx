@@ -1,4 +1,4 @@
-import { Sidebar } from "@/components/layout";
+import { Sidebar, Content } from "@/components/layout";
 import { useWorldStore } from "@/store";
 import { useParams } from "react-router-dom";
 import { NotFound } from "../not-found";
@@ -12,6 +12,7 @@ const Singleplayer = () => {
   return (
     <>
       <Sidebar world={world} />
+      <Content />
     </>
   );
 };
