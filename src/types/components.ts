@@ -77,6 +77,10 @@ export interface SidebarProps {
   className?: string;
 }
 
+export interface ContentProps {
+  world: World;
+}
+
 export interface WorldModalWrapperProps {
   onCancel: () => void;
   onSubmit: () => void;

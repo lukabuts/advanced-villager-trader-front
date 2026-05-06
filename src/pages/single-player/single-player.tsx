@@ -12,7 +12,7 @@ const Singleplayer = () => {
   return (
     <>
       <Sidebar world={world} />
-      <Content />
+      <Content world={world} />
     </>
   );
 };

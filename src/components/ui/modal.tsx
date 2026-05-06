@@ -7,7 +7,7 @@ export function Modal() {
 
   return (
     <div
-      className="fixed inset-0 bg-black/70 backdrop-blur-sm z-200 flex items-center justify-center p-5"
+      className="fixed inset-0 bg-black/70 backdrop-blur-sm z-200 flex items-center justify-center p-5 w-dvw h-dvh"
       onClick={close}
     >
       <div
