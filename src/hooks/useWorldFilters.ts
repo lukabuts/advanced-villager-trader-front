@@ -1,6 +1,5 @@
 import { useSearchParams } from "react-router-dom";
 import type { Profession } from "@/constants";
-import { PROFESSIONS } from "@/constants";
 import type { VillagerStatus } from "@/types";
 
 export function useWorldFilters() {
@@ -25,7 +24,7 @@ export function useWorldFilters() {
     );
   };
 
-  const setProfessions = (profession: Profession | "all") => {
+  const addProfession = (profession: Profession | "all") => {
     setSearchParams(
       (prev) => {
         if (profession === "all") {
@@ -42,8 +41,25 @@ export function useWorldFilters() {
           next = [...current, profession];
         }
 
-        // normalize to "all" if all selected
-        if (next.length === 0 || next.length === PROFESSIONS.length) {
+        if (next.length === 0) {
+          prev.delete("p");
+        } else {
+          prev.set("p", next.join(","));
+        }
+
+        return prev;
+      },
+      { replace: true },
+    );
+  };
+
+  const removeProfession = (profession: Profession) => {
+    setSearchParams(
+      (prev) => {
+        const current = (prev.get("p")?.split(",") as Profession[]) ?? [];
+        const next = current.filter((p) => p !== profession);
+
+        if (next.length === 0) {
           prev.delete("p");
         } else {
           prev.set("p", next.join(","));
@@ -83,7 +99,8 @@ export function useWorldFilters() {
     professions,
     status,
     setSearch,
-    setProfessions,
+    addProfession,
+    removeProfession,
     setStatus,
     reset,
   };

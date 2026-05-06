@@ -6,7 +6,7 @@ import { useWorldFilters } from "@/hooks";
 import type { Profession } from "@/constants";
 
 const Sidebar = ({ world, className }: SidebarProps) => {
-  const { search, professions, setSearch, setProfessions } = useWorldFilters();
+  const { search, professions, setSearch, addProfession } = useWorldFilters();
 
   const villagers = world?.tradingHall.villagers ?? [];
 
@@ -25,14 +25,14 @@ const Sidebar = ({ world, className }: SidebarProps) => {
       onClick={close}
     >
       <div
-        className="flex flex-col gap-2 sm:gap-3 lg:shadow-none lg:bg-transparent lg:border-0 bg-bg border-b border-border py-2 shadow-md dark:shadow-border max-lg:animate-fade-in"
+        className="flex flex-col gap-container lg:shadow-none lg:bg-transparent lg:border-0 bg-bg border-b border-border max-lg:py-2 shadow-md dark:shadow-border max-lg:animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         <SearchTrades onSearchChange={setSearch} searchValue={search} />
         <ProfessionFilter
           availableProfessions={availableProfessions}
           activeProfessions={professions}
-          handleProfessionChange={setProfessions}
+          handleProfessionChange={addProfession}
         />
         <StatsPanel world={world} />
       </div>
