@@ -17,6 +17,8 @@ export function Content({ world }: ContentProps) {
     filteredVillagers = filteredVillagers.filter(
       (v) => v.dead === (status === "dead"),
     );
+  } else {
+    filteredVillagers = filteredVillagers.filter((v) => !v.dead);
   }
 
   if (professions !== "all") {
@@ -53,13 +55,18 @@ export function Content({ world }: ContentProps) {
         ) : filteredVillagers.length === 0 ? (
           <NotFoundWrapper icon="🔍">
             <p className="text-sm">
-              No {status === "dead" ? "dead" : ""} villagers match the current
-              filters.
+              No {status === "dead" ? "dead" : "alive"} villagers{" "}
+              {search || professions !== "all" ? "matching those filters" : ""}
             </p>
           </NotFoundWrapper>
         ) : (
           filteredVillagers.map((v) => (
-            <VillagerCard key={v.id} villager={v} search={search} />
+            <VillagerCard
+              key={v.id}
+              world={world}
+              villager={v}
+              search={search}
+            />
           ))
         )}
       </div>

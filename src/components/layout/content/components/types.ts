@@ -1,4 +1,4 @@
-import type { Villager, VillagerStatus } from "@/types";
+import type { Villager, VillagerStatus, World } from "@/types";
 
 export interface NavBtnProps {
   type: VillagerStatus;
@@ -11,6 +11,7 @@ export interface NotFoundWrapperProps {
 }
 
 export interface VillagerCardProps {
+  world: World;
   villager: Villager;
   search: string;
 }

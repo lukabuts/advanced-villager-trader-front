@@ -36,6 +36,7 @@ export function FilterTags() {
       {professions !== "all" &&
         professions.map((p) => (
           <FilterTag
+            key={p}
             filter="Profession"
             value={p}
             onClick={() => {

@@ -1,8 +1,9 @@
 import { VillagerIcon } from "@/assets/icons";
 import { PROF_COLORS, PROF_EMOJI } from "@/constants";
-import type { VillagerCardProps } from "./types";
+import type { VillagerCardProps } from "../types";
+import { VillagerCardBtns } from "./components";
 
-export function VillagerCard({ villager, search }: VillagerCardProps) {
+export function VillagerCard({ world, villager, search }: VillagerCardProps) {
   function highlight(text: string, query: string) {
     if (!query) return text;
     const idx = text.toLowerCase().indexOf(query.toLowerCase());
@@ -18,14 +19,17 @@ export function VillagerCard({ villager, search }: VillagerCardProps) {
   return (
     <div
       key={villager.id}
-      className="villager-card flex flex-col bg-panel border border-border rounded-2.5 relative overflow-hidden"
+      className={`villager-card flex flex-col bg-panel border border-border rounded-2.5 relative overflow-hidden ${villager.dead ? "opacity-80" : ""}`}
     >
       <div
         className="card-profession-banner h-1 rounded-t-2.5"
         style={{ backgroundColor: PROF_COLORS[villager.profession] }}
       />
       <div className="p-3.5 pb-2.5 flex items-start gap-2.5">
-        <VillagerIcon className="size-11 shrink-0 rounded-md border border-border bg-bg-2" />
+        <VillagerIcon
+          className="size-11 shrink-0 rounded-md border border-border bg-bg-2"
+          color={PROF_COLORS[villager.profession]}
+        />
         <div className="flex-1 min-w-0">
           <div className="text-sm font-semibold text-content wrap-break-word mb-1">
             {villager.name}
@@ -58,10 +62,7 @@ export function VillagerCard({ villager, search }: VillagerCardProps) {
           ))}
         </div>
       )}
-      <div className="border-t border-border-light p-3.5 pt-2.5 flex  gap-1.5 flex-wrap mt-auto">
-        <button className="btn btn-stone btn-sm">✏ Edit</button>
-        <button className="btn btn-red btn-sm">☠ Kill</button>
-      </div>
+      <VillagerCardBtns world={world} villager={villager} />
     </div>
   );
 }
