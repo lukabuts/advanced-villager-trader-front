@@ -21,7 +21,7 @@ export interface WorldStore {
   // Villager actions
   addVillager: (
     worldId: string,
-    villager: Omit<Villager, "id" | "createdAt">,
+    villager: Omit<Villager, "id" | "createdAt" | "dead">,
   ) => void;
   updateVillager: (
     worldId: string,

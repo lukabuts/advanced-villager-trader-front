@@ -1,10 +1,12 @@
 import type { Profession } from "@/constants";
 
+export type TradeType = "buy" | "sell";
 export interface Trade {
   id: string;
   name: string;
   cost: number;
-  locked: boolean;
+  quantity: number;
+  type: TradeType;
 }
 
 export interface Villager {

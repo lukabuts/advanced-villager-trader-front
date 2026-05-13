@@ -1,8 +1,8 @@
 import type { Villager, World } from "@/types";
-import { VillagerModalWrapper } from "./villager-modal-wrapper";
 import { RecycleIcon } from "lucide-react";
 import { useModalStore, useWorldStore } from "@/store";
 import type { VillagerCardBtnsProps } from "./types";
+import { VillagerModalWrapper } from "../../villager-modal-wrapper";
 
 function DeleteModalContent({
   villager,
@@ -10,12 +10,13 @@ function DeleteModalContent({
   type = "kill",
 }: VillagerCardBtnsProps) {
   const { deleteVillager, killVillager } = useWorldStore();
-
+  const { close } = useModalStore();
   return (
     <VillagerModalWrapper
       onConfirm={() => {
         if (type === "delete") deleteVillager(worldId, villager.id);
         else killVillager(worldId, villager.id);
+        close();
       }}
       type={type}
       title={type === "kill" ? "Kill Villager" : "Delete Villager"}

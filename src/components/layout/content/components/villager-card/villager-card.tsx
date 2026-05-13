@@ -18,8 +18,7 @@ export function VillagerCard({ world, villager, search }: VillagerCardProps) {
   }
   return (
     <div
-      key={villager.id}
-      className={`villager-card flex flex-col bg-panel border border-border rounded-2.5 relative overflow-hidden ${villager.dead ? "opacity-80" : ""}`}
+      className={`villager-card flex flex-col bg-panel border border-border rounded-2.5 relative ${villager.dead ? "opacity-80" : ""} animate-fade-in flex-none shadow-lg`}
     >
       <div
         className="card-profession-banner h-1 rounded-t-2.5"
@@ -45,7 +44,7 @@ export function VillagerCard({ world, villager, search }: VillagerCardProps) {
         </div>
       </div>
       {villager.trades.length > 0 && (
-        <div className="px-3.5 pb-2.5 flex flex-col gap-2 max-h-45 overflow-y-auto">
+        <div className="px-3.5 pb-2.5 flex flex-col gap-2 min-scrollbar">
           {villager.trades.map((trade) => (
             <div
               key={trade.id}

@@ -52,6 +52,7 @@ export const useWorldStore = create<WorldStore>()(
           ...villager,
           id: generateId(),
           createdAt: Date.now(),
+          dead: false,
         };
         set((state) => ({
           worlds: state.worlds.map((w) =>
@@ -105,7 +106,6 @@ export const useWorldStore = create<WorldStore>()(
       },
 
       killVillager: (worldId, villagerId) => {
-        console.log("Killing villager", villagerId, "in world", worldId);
         set((state) => ({
           worlds: state.worlds.map((w) =>
             w.id === worldId
