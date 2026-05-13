@@ -42,12 +42,12 @@ export function Content({ world }: ContentProps) {
           <NavBtn type="alive" className="text-emerald-dark border-border" />
           <NavBtn type="dead" className="text-red border-red" />
         </div>
-        <AddVillagerBtn />
+        <AddVillagerBtn world={world} />
       </div>
       {/* Active Filters */}
       {search || professions !== "all" ? <FilterTags /> : null}
       {/* Villagers Grid */}
-      <div className="villagers-grid pt-1">
+      <div className="villagers-grid pt-1 overflow-y-auto gap-3 min-scrollbar">
         {world.tradingHall.villagers.length === 0 ? (
           <NotFoundWrapper icon="🏘️">
             <p className="text-sm">No villagers yet. Add one to get started!</p>

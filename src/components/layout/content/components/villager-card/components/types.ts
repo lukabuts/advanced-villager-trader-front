@@ -5,10 +5,3 @@ export interface VillagerCardBtnsProps {
   worldId: string;
   type?: "kill" | "delete";
 }
-
-export interface VillagerModalWrapperProps {
-  children: React.ReactNode;
-  title: string;
-  type: "edit" | "add" | "kill" | "delete";
-  onConfirm: () => void;
-}

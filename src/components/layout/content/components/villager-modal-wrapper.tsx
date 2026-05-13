@@ -32,7 +32,6 @@ export function VillagerModalWrapper({
           className={`btn ${type === "kill" || type === "delete" ? "btn-red" : "btn-emerald"}`}
           onClick={() => {
             onConfirm();
-            close();
           }}
         >
           {type === "edit"

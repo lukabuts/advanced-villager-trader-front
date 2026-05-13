@@ -15,3 +15,10 @@ export interface VillagerCardProps {
   villager: Villager;
   search: string;
 }
+
+export interface VillagerModalWrapperProps {
+  children: React.ReactNode;
+  title: string;
+  type: "edit" | "add" | "kill" | "delete";
+  onConfirm: () => void;
+}

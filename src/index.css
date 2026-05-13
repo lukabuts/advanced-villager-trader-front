@@ -141,6 +141,28 @@
       width: 8px;
     }
   }
+
+  .min-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #8b8b8b transparent;
+  }
+
+  .min-scrollbar ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .min-scrollbar::-webkit-scrollbar-thumb {
+    background: #8b8b8b;
+    border-radius: 999px;
+  }
+
+  .min-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #8b8b8b;
+  }
+
+  .min-scrollbar::-webkit-scrollbar-track {
+    background: #000000;
+  }
 }
 
 @layer components {
@@ -251,17 +273,16 @@
   }
 
   .villagers-grid {
-    display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
-    overflow-y: auto;
-    max-height: calc(100vh - 155px);
+    max-height: calc(-155px + 100vh);
+    grid-auto-rows: min-content;
+    display: grid;
   }
 
-  .villager-card .villager-card {
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-    transition:
-      transform 0.18s,
-      box-shadow 0.18s;
+  @media (max-width: 600px) {
+    .villagers-grid {
+      grid-template-columns: 1fr;
+      max-height: calc(-145px + 100vh);
+    }
   }
 }
