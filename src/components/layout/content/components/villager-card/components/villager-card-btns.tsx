@@ -2,16 +2,13 @@ import type { Villager, World } from "@/types";
 import { VillagerModalWrapper } from "./villager-modal-wrapper";
 import { RecycleIcon } from "lucide-react";
 import { useModalStore, useWorldStore } from "@/store";
+import type { VillagerCardBtnsProps } from "./types";
 
 function DeleteModalContent({
   villager,
   worldId,
   type = "kill",
-}: {
-  villager: Villager;
-  worldId: string;
-  type?: "kill" | "delete";
-}) {
+}: VillagerCardBtnsProps) {
   const { deleteVillager, killVillager } = useWorldStore();
 
   return (

@@ -6,12 +6,17 @@ import { useWorldFilters } from "@/hooks";
 import type { Profession } from "@/constants";
 
 const Sidebar = ({ world, className }: SidebarProps) => {
-  const { search, professions, setSearch, addProfession } = useWorldFilters();
+  const { search, professions, status, setSearch, addProfession } =
+    useWorldFilters();
 
   const villagers = world?.tradingHall.villagers ?? [];
 
   const availableProfessions = [
-    ...new Set(villagers.filter((v) => !v.dead).map((v) => v.profession)),
+    ...new Set(
+      villagers
+        .filter((v) => v.dead === (status === "dead"))
+        .map((v) => v.profession),
+    ),
   ] as Profession[];
 
   const { isOpen, close } = useSidebarStore();
