@@ -11,7 +11,7 @@ export function Modal() {
       onClick={close}
     >
       <div
-        className="bg-panel border-2 border-border w-full max-w-sm animate-fade-in"
+        className="w-full max-w-xl animate-fade-in"
         onClick={(e) => e.stopPropagation()}
       >
         {content}

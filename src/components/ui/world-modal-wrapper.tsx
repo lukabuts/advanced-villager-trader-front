@@ -12,7 +12,7 @@ export function WorldModalWrapper({
 }: WorldModalWrapperProps) {
   const { close } = useModalStore();
   return (
-    <div className="px-6 py-4 gap-4 flex flex-col">
+    <div className="px-6 py-4 gap-4 flex flex-col bg-panel border-2 border-border max-w-md mx-auto">
       <div className=" border-b border-border font-mojangles text-white flex items-center justify-between pb-4">
         <p className="text-lg">{title}</p>
         <button
