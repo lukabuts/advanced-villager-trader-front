@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
 import { PlusIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -91,7 +92,7 @@ export function SelectTrades({
           </div>
         ) : (
           <div
-            className="space-y-1.5 min-scrollbar max-h-38 overflow-y-auto;
+            className="space-y-1.5 min-scrollbar max-h-28 overflow-y-auto;
 "
           >
             {trades.map((trade) => (
@@ -129,26 +130,6 @@ export function SelectTrades({
         )}
         <div className="border-dashed border-t-2 border-border pt-2 space-y-2">
           <div className="flex items-center gap-2">
-            <div>
-              <button
-                onClick={() => {
-                  setTradeType("buy");
-                }}
-                className={`btn btn-sm p-2 w-fit rounded-none border ${tradeType === "buy" ? "btn-emerald border-emerald" : "border-border"}`}
-                disabled={profession === ""}
-              >
-                Buy
-              </button>
-              <button
-                onClick={() => {
-                  setTradeType("sell");
-                }}
-                className={`btn btn-sm p-2 w-fit rounded-none ${tradeType === "sell" ? "btn-red" : "border-border"}`}
-                disabled={profession === ""}
-              >
-                Sell
-              </button>
-            </div>
             <select
               name="profession"
               id="select-profession"
@@ -174,7 +155,7 @@ export function SelectTrades({
               type="number"
               name="item-quantity"
               id="item-quantity"
-              className={`${className} ${tradeType === "sell" || (itemQuantity !== null && itemQuantity > 1) ? " w-32" : " hidden"}`}
+              className={`${className} ${tradeType === "sell" || (itemQuantity !== null && itemQuantity > 1) ? " w-24" : " hidden"}`}
               placeholder="Quantity..."
               value={itemQuantity || ""}
               onChange={(e) =>
@@ -209,6 +190,26 @@ export function SelectTrades({
             )}
           </div>
           <div className="flex items-center gap-2">
+            <div>
+              <button
+                onClick={() => {
+                  setTradeType("buy");
+                }}
+                className={`btn btn-sm p-2 w-fit rounded-none border ${tradeType === "buy" ? "btn-emerald border-emerald" : "border-border"}`}
+                disabled={profession === ""}
+              >
+                Buy
+              </button>
+              <button
+                onClick={() => {
+                  setTradeType("sell");
+                }}
+                className={`btn btn-sm p-2 w-fit rounded-none ${tradeType === "sell" ? "btn-red" : "border-border"}`}
+                disabled={profession === ""}
+              >
+                Sell
+              </button>
+            </div>
             <div className="relative flex-1">
               <img
                 src={emerald_icon}

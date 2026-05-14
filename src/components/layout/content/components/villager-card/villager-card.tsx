@@ -1,21 +1,11 @@
 import { VillagerIcon } from "@/assets/icons";
 import { PROF_COLORS, PROF_EMOJI } from "@/constants";
 import type { VillagerCardProps } from "../types";
-import { VillagerCardBtns } from "./components";
+import { TradeCard, VillagerCardBtns } from "./components";
 
 export function VillagerCard({ world, villager, search }: VillagerCardProps) {
-  function highlight(text: string, query: string) {
-    if (!query) return text;
-    const idx = text.toLowerCase().indexOf(query.toLowerCase());
-    if (idx === -1) return text;
-    return (
-      <>
-        {text.slice(0, idx)}
-        <mark>{text.slice(idx, idx + query.length)}</mark>
-        {text.slice(idx + query.length)}
-      </>
-    );
-  }
+  const buyTrades = villager.trades.filter((t) => t.type === "buy");
+  const sellTrades = villager.trades.filter((t) => t.type === "sell");
   return (
     <div
       className={`villager-card flex flex-col bg-panel border border-border rounded-2.5 relative ${villager.dead ? "opacity-80" : ""} animate-fade-in flex-none shadow-lg`}
@@ -44,21 +34,29 @@ export function VillagerCard({ world, villager, search }: VillagerCardProps) {
         </div>
       </div>
       {villager.trades.length > 0 && (
-        <div className="px-3.5 pb-2.5 flex flex-col gap-2 min-scrollbar">
-          {villager.trades.map((trade) => (
-            <div
-              key={trade.id}
-              className="flex items-center justify-between gap-2 py-1 px-2 bg-bg-2 rounded-sm border border-border-light text-sm"
-            >
-              <span className="flex-1 text-content text-13">
-                {highlight(trade.name, search)}
-              </span>
-
-              <span className="font-semibold text-emerald-dark text-xs">
-                {trade.cost}
-              </span>
-            </div>
-          ))}
+        <div
+          className={`px-3.5 pb-2.5 flex flex-col gap-2 min-scrollbar max-h-36 overflow-y-auto border-t border-border-light pt-1 ${villager.notes ? "" : "mt-5.5"}`}
+        >
+          {buyTrades.length > 0 && (
+            <>
+              <div className="text-xs font-semibold text-content-muted uppercase tracking-wider">
+                Buying From Villager
+              </div>
+              {buyTrades.map((trade) => (
+                <TradeCard key={trade.id} trade={trade} search={search} />
+              ))}
+            </>
+          )}
+          {sellTrades.length > 0 && (
+            <>
+              <div className="text-xs font-semibold text-content-muted uppercase tracking-wider">
+                Selling To Villager
+              </div>
+              {sellTrades.map((trade) => (
+                <TradeCard key={trade.id} trade={trade} search={search} />
+              ))}
+            </>
+          )}
         </div>
       )}
       <VillagerCardBtns world={world} villager={villager} />

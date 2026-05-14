@@ -60,14 +60,16 @@ export function Content({ world }: ContentProps) {
             </p>
           </NotFoundWrapper>
         ) : (
-          filteredVillagers.map((v) => (
-            <VillagerCard
-              key={v.id}
-              world={world}
-              villager={v}
-              search={search}
-            />
-          ))
+          filteredVillagers
+            .sort((a, b) => b.createdAt - a.createdAt)
+            .map((v) => (
+              <VillagerCard
+                key={v.id}
+                world={world}
+                villager={v}
+                search={search}
+              />
+            ))
         )}
       </div>
     </div>

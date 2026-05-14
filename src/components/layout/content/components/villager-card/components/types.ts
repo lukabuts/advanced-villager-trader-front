@@ -1,7 +1,12 @@
-import type { Villager } from "@/types";
+import type { Trade, Villager } from "@/types";
 
 export interface VillagerCardBtnsProps {
   villager: Villager;
   worldId: string;
   type?: "kill" | "delete";
+}
+
+export interface TradeCardProps {
+  trade: Trade;
+  search: string;
 }
