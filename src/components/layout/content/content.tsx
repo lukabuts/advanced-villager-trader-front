@@ -5,11 +5,14 @@ import {
   NavBtn,
   NotFoundWrapper,
   VillagerCard,
+  VillagerModal,
 } from "./components";
 import { useWorldFilters } from "@/hooks";
+import { useModalStore } from "@/store";
 
 export function Content({ world }: ContentProps) {
   const { search, professions, status } = useWorldFilters();
+  const { open } = useModalStore();
 
   let filteredVillagers = world.tradingHall.villagers;
 
@@ -42,12 +45,18 @@ export function Content({ world }: ContentProps) {
           <NavBtn type="alive" className="text-emerald-dark border-border" />
           <NavBtn type="dead" className="text-red border-red" />
         </div>
-        <AddVillagerBtn world={world} />
+        <AddVillagerBtn
+          onClick={() => {
+            open(<VillagerModal world={world} type="add" />);
+          }}
+        />
       </div>
       {/* Active Filters */}
       {search || professions !== "all" ? <FilterTags /> : null}
       {/* Villagers Grid */}
-      <div className="villagers-grid pt-1 overflow-y-auto gap-3 min-scrollbar">
+      <div
+        className={`villagers-grid pt-1 overflow-y-auto gap-3 min-scrollbar h-full ${search || professions !== "all" ? "max-h-[calc(100dvh-180px)]" : "max-h-[calc(100dvh-145px)]"}`}
+      >
         {world.tradingHall.villagers.length === 0 ? (
           <NotFoundWrapper icon="🏘️">
             <p className="text-sm">No villagers yet. Add one to get started!</p>

@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import { useEffect, useState } from "react";
-import { PlusIcon, XIcon } from "lucide-react";
+import { ArrowRight, Info, PlusIcon, XIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { TradeType } from "@/types";
 import { ENCHANTED_BOOKS, VILLAGER_TRADES } from "@/constants";
@@ -79,26 +79,42 @@ export function SelectTrades({
 
   return (
     <div className="flex flex-col gap-1.25">
-      <ModalLabel htmlFor="trade-name">Trades</ModalLabel>
-      <div className={className + " text-xs text-content-muted italic"}>
-        <span className="bg-emerald text-content p-0.5">BUY</span> you pay
-        emeralds <span className="bg-red text-content p-0.5">SELL</span> you
-        give items → get emeralds
-      </div>
+      <ModalLabel
+        htmlFor="trade-name"
+        className="group relative cursor-pointer"
+      >
+        <span className="flex gap-0.5">
+          Trades <Info size={9} />
+        </span>
+
+        <div
+          className={cn(
+            "flex gap-0.5",
+            "text-xs text-content-dim italic",
+            "absolute top-full left-0 mt-1 z-10",
+            "opacity-0 -translate-y-1 pointer-events-none bg-bg-2",
+            "group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto",
+            "transition-all duration-200 ease-out",
+            "border border-border rounded shadow-md p-1.5 whitespace-nowrap",
+          )}
+        >
+          <span className="text-emerald-dark">BUY </span> you pay emeralds;{" "}
+          <span className="text-red-dark">SELL</span> you give items{" "}
+          <ArrowRight size={14} /> get emeralds
+        </div>
+      </ModalLabel>
+
       <div className="flex flex-col gap-1.5">
         {trades.length === 0 ? (
           <div className="text-content-muted text-13 italic text-center py-2">
             No trades yet — add below
           </div>
         ) : (
-          <div
-            className="space-y-1.5 min-scrollbar max-h-28 overflow-y-auto;
-"
-          >
+          <div className="space-y-1.5 min-scrollbar max-h-28 overflow-y-auto">
             {trades.map((trade) => (
               <div
                 key={trade.id}
-                className={className + " flex items-center gap-2"}
+                className={cn("flex items-center gap-1", className)}
               >
                 <span
                   className={
@@ -109,10 +125,14 @@ export function SelectTrades({
                 >
                   {trade.type.toUpperCase()}
                 </span>
-                <span>{trade.name}</span>
-                {trade.quantity > 1 && <span>{trade.quantity}X</span>}
+                <span className="ml-2">{trade.name}</span>
+                {trade.quantity > 1 && (
+                  <span className="text-content-muted text-xs">
+                    {trade.quantity}×
+                  </span>
+                )}
 
-                <div className="flex items-center">
+                <div className="flex items-center text-emerald-dark ml-4">
                   <img src={emerald_icon} alt="Emerald" className="w-4 h-4" />{" "}
                   {trade.cost}
                 </div>

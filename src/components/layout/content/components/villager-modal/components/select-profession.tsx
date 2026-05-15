@@ -9,6 +9,7 @@ export function SelectProfession({
   setProfession,
   trades,
   resetVillagerData,
+  type,
 }: SelectProfessionProps) {
   return (
     <div className="flex flex-col gap-1.25">
@@ -22,10 +23,11 @@ export function SelectProfession({
         )}
         value={profession}
         onChange={(e) => {
+          if (type === "edit") return;
           setProfession(e.target.value as Profession | "");
           resetVillagerData();
         }}
-        disabled={trades.length > 0}
+        disabled={trades.length > 0 || type === "edit"}
       >
         <option value="">-- Select Profession --</option>
         {PROFESSIONS.map((prof) => (
