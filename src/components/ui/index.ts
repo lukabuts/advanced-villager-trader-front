@@ -3,8 +3,6 @@ export * from "./theme-toggle";
 export * from "./minecraft-button";
 export * from "./loading-screen";
 export * from "./minecraft-text";
-export * from "./select-world-card";
-export * from "./select-world-btns";
 export * from "./modal";
 export * from "./minecraft-search-input";
 export * from "./input-error";

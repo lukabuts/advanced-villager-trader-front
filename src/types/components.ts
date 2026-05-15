@@ -27,11 +27,9 @@ export interface SelectWorldCardProps {
 }
 
 export interface SelectWorldBtnsProps {
-  selectedWorldId: World["id"] | null;
-  navigateToWorld: (worldId: World["id"]) => void;
-  onDelete: () => void;
-  onEdit: () => void;
-  onCreate: () => void;
+  selectedWorld: World | null;
+  navigateToWorld: (worldId: World["id"] | null) => void;
+  clearSelection: () => void;
 }
 
 export interface EditWorldCardProps {

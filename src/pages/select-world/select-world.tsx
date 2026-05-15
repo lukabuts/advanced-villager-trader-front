@@ -1,19 +1,10 @@
-import {
-  MinecraftText,
-  SelectWorldCard,
-  SelectWorldBtns,
-  MinecraftSearchInput,
-} from "@/components/ui";
+import { MinecraftText, MinecraftSearchInput } from "@/components/ui";
 import type { World } from "@/types";
-import { useWorldStore, useModalStore } from "@/store";
+import { useWorldStore } from "@/store";
 import { useState } from "react";
 import { buildRoute, ROUTES } from "@/constants";
 import { useNavigate } from "react-router-dom";
-import {
-  DeleteWorldModal,
-  EditWorldModal,
-  CreateWorldModal,
-} from "./components";
+import { SelectWorldBtns, SelectWorldCard } from "./components";
 
 const SelectWorld = () => {
   const navigate = useNavigate();
@@ -23,7 +14,6 @@ const SelectWorld = () => {
   );
   const [filter, setFilter] = useState("");
   const { worlds } = useWorldStore();
-  const { open } = useModalStore();
 
   const selectedWorld = worlds.find((w) => w.id === selectedWorldId) ?? null;
 
@@ -31,7 +21,8 @@ const SelectWorld = () => {
     .filter((w) => w.name.toLowerCase().includes(filter.toLowerCase()))
     .sort((a, b) => b.createdAt - a.createdAt);
 
-  const navigateToWorld = (worldId: World["id"]) => {
+  const navigateToWorld = (worldId: World["id"] | null) => {
+    if (!worldId) return;
     navigate(buildRoute(ROUTES.SINGLEPLAYER_WORLD, { worldId }));
   };
   const clearSelection = () => setSelectedWorldId(null);
@@ -84,25 +75,9 @@ const SelectWorld = () => {
         </div>
 
         <SelectWorldBtns
-          selectedWorldId={selectedWorldId}
+          selectedWorld={selectedWorld}
           navigateToWorld={navigateToWorld}
-          onDelete={() =>
-            open(
-              <DeleteWorldModal
-                selectedWorld={selectedWorld}
-                clearSelection={clearSelection}
-              />,
-            )
-          }
-          onEdit={() =>
-            open(
-              <EditWorldModal
-                selectedWorld={selectedWorld}
-                clearSelection={clearSelection}
-              />,
-            )
-          }
-          onCreate={() => open(<CreateWorldModal />)}
+          clearSelection={clearSelection}
         />
       </div>
     </>
