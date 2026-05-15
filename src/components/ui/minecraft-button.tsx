@@ -20,7 +20,7 @@ export function MinecraftButton({
         "border-2 border-black",
         "disabled:cursor-not-allowed",
         !disabled ? "hover:border-white" : "",
-        "h-10 sm:h-12 w-80 sm:w-120 max-w-full",
+        "h-10 sm:h-12 w-80 sm:w-120 max-w-full sm:text-xl",
 
         className,
       )}
@@ -30,7 +30,7 @@ export function MinecraftButton({
         className={cn(
           "w-full h-full pb-[0.3em]",
           "flex items-center justify-center",
-          "font-mojangles sm:text-xl  text-[#dddddd]",
+          "font-mojangles  text-[#dddddd]",
           "[text-shadow:2px_2px_rgba(0,0,0,0.67)]",
 
           // default inset bevel
