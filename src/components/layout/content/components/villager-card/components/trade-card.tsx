@@ -23,18 +23,14 @@ export function TradeCard({ trade, search }: TradeCardProps) {
         isSell ? "border-l-red" : "border-l-emerald"
       }`}
     >
-      <span className="flex-1 text-content text-13 flex items-center gap-1.5">
-        {highlight(trade.name, search)}
-        {isSell && trade.quantity && (
+      <p className="flex-1 text-content text-13 flex items-center gap-1.5">
+        <span>{highlight(trade.name, search)}</span>
+        {trade.quantity > 1 && (
           <span className="text-content-muted text-xs">{trade.quantity}×</span>
         )}
-      </span>
+      </p>
 
-      <span
-        className={`font-semibold text-xs flex items-center gap-1 ${
-          isSell ? "text-red-dark" : "text-emerald-dark"
-        }`}
-      >
+      <span className="font-semibold text-xs flex items-center gap-0.5 text-emerald-dark">
         <img src={emerald_icon} alt="Emerald" className="size-4" />
         {trade.cost}
       </span>

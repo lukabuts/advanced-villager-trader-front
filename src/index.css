@@ -268,8 +268,8 @@
     text-shadow: #2e2e2e 2px 3px;
   }
 
-  .min-h-content-header {
-    min-height: calc(100vh - 70px);
+  .h-content-header {
+    height: calc(100dvh - 70px);
   }
 
   .villagers-grid {

@@ -1,16 +1,11 @@
-import { useModalStore } from "@/store";
 import { PlusIcon } from "lucide-react";
-import { VillagerModal } from "./villager-modal";
-import type { World } from "@/types";
+import type { AddVillagerBtnProps } from "./types";
 
-export function AddVillagerBtn({ world }: { world: World }) {
-  const { open } = useModalStore();
+export function AddVillagerBtn({ onClick }: AddVillagerBtnProps) {
   return (
     <button
       className="btn btn-emerald flex gap-2 items-center border-none"
-      onClick={() => {
-        open(<VillagerModal world={world} type="add" />);
-      }}
+      onClick={onClick}
     >
       <PlusIcon size={14} />{" "}
       <p>

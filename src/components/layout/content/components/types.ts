@@ -16,9 +16,19 @@ export interface VillagerCardProps {
   search: string;
 }
 
+export interface VillagerModalProps {
+  world: World;
+  type: "edit" | "add";
+  villager?: Villager;
+}
+
 export interface VillagerModalWrapperProps {
   children: React.ReactNode;
   title: string;
   type: "edit" | "add" | "kill" | "delete";
   onConfirm: () => void;
+}
+
+export interface AddVillagerBtnProps {
+  onClick: () => void;
 }

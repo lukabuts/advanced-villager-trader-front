@@ -1,8 +1,9 @@
 import type { Villager, World } from "@/types";
 import { RecycleIcon } from "lucide-react";
-import { useModalStore, useWorldStore } from "@/store";
+import { useModalStore, useNotificationStore, useWorldStore } from "@/store";
 import type { VillagerCardBtnsProps } from "./types";
 import { VillagerModalWrapper } from "../../villager-modal-wrapper";
+import { VillagerModal } from "../../villager-modal";
 
 function DeleteModalContent({
   villager,
@@ -11,11 +12,17 @@ function DeleteModalContent({
 }: VillagerCardBtnsProps) {
   const { deleteVillager, killVillager } = useWorldStore();
   const { close } = useModalStore();
+  const { show } = useNotificationStore();
   return (
     <VillagerModalWrapper
       onConfirm={() => {
-        if (type === "delete") deleteVillager(worldId, villager.id);
-        else killVillager(worldId, villager.id);
+        if (type === "delete") {
+          deleteVillager(worldId, villager.id);
+          show(`Villager "${villager.name.slice(0, 12)}" deleted successfully`);
+        } else {
+          killVillager(worldId, villager.id);
+          show(`Villager "${villager.name.slice(0, 12)}" killed successfully`);
+        }
         close();
       }}
       type={type}
@@ -40,6 +47,7 @@ export function VillagerCardBtns({
 }) {
   const { reviveVillager } = useWorldStore();
   const { open } = useModalStore();
+  const { show } = useNotificationStore();
 
   return (
     <div className="border-t border-border-light p-3.5 pt-2.5 flex  gap-1.5 flex-wrap mt-auto justify-end">
@@ -48,6 +56,9 @@ export function VillagerCardBtns({
           <button
             onClick={() => {
               reviveVillager(world.id, villager.id);
+              show(
+                `Villager "${villager.name.slice(0, 12)}" revived successfully`,
+              );
             }}
             className="btn btn-stone btn-sm flex items-center gap-2"
           >
@@ -70,7 +81,16 @@ export function VillagerCardBtns({
         </>
       ) : (
         <>
-          <button className="btn btn-stone btn-sm">✏ Edit</button>
+          <button
+            className="btn btn-stone btn-sm"
+            onClick={() => {
+              open(
+                <VillagerModal world={world} villager={villager} type="edit" />,
+              );
+            }}
+          >
+            ✏ Edit
+          </button>
           <button
             onClick={() => {
               open(

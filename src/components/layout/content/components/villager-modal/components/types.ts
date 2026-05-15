@@ -4,6 +4,7 @@ import type { Trade } from "@/types";
 export interface ModalLabelProps {
   htmlFor: string;
   children: React.ReactNode;
+  className?: string;
 }
 
 export interface SelectProfessionProps {
@@ -12,6 +13,7 @@ export interface SelectProfessionProps {
   setProfession: (prof: Profession | "") => void;
   trades: Trade[];
   resetVillagerData: () => void;
+  type: "add" | "edit";
 }
 
 export interface SelectTradesProps {

@@ -23,7 +23,7 @@ export default function NotFound({
     <div
       className={cn(
         "flex items-center justify-center bg-bg relative overflow-hidden",
-        type === "page" ? "min-h-screen" : "min-h-content-header",
+        type === "page" ? "min-h-screen" : "h-content-header",
         className,
       )}
     >
