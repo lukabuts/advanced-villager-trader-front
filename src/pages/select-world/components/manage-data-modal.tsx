@@ -3,23 +3,27 @@ import { LOCAL_STORAGE_KEYS } from "@/constants";
 import { useModalStore, useNotificationStore } from "@/store";
 import { CopyIcon, EditIcon } from "lucide-react";
 import { useRef, useState } from "react";
+import type { ManageDataModalProps } from "./types";
 
-export function ManageDataModal() {
+export function ManageDataModal({
+  initialValue,
+  initialEditing = false,
+}: ManageDataModalProps) {
   const data = localStorage.getItem(LOCAL_STORAGE_KEYS.WORLDS);
   const parsedData = data ? JSON.parse(data) : null;
   const jsonString = JSON.stringify(parsedData, null, 2);
 
   const [textareaValue, setTextareaValue] = useState(
-    jsonString || "No world data found.",
+    initialValue ?? jsonString ?? "No world data found.",
   );
   const [isCopied, setIsCopied] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(initialEditing);
   const [message, setMessage] = useState<{
     type: "success" | "error";
     text: string;
   } | null>(null);
   const { show } = useNotificationStore();
-  const { close } = useModalStore();
+  const { open, close } = useModalStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   function showMessage(type: "success" | "error", text: string) {
@@ -105,15 +109,33 @@ export function ManageDataModal() {
       show("World data saved successfully!");
     } catch (err) {
       console.error("Error parsing JSON:", err);
-      showMessage("error", "Invalid JSON format. Please fix it and try again.");
+      showMessage("error", "Invalid JSON format.");
     }
   }
 
   return (
     <WorldModalWrapper
       title="Manage World Data"
-      onCancel={handleImportClick}
-      onSubmit={handleSaving}
+      onCancel={close}
+      onSubmit={() => {
+        open(
+          <WorldModalWrapper
+            title="Confirm Save"
+            onCancel={() => {
+              open(
+                <ManageDataModal
+                  initialValue={textareaValue}
+                  initialEditing={isEditing}
+                />,
+              );
+            }}
+            onSubmit={handleSaving}
+            label="Yes, Save"
+          >
+            <span className="font-mojangles">Save Changes?</span>
+          </WorldModalWrapper>,
+        );
+      }}
       label="Save"
     >
       <div className="flex gap-2 mb-2">

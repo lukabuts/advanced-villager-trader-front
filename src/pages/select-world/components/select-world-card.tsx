@@ -1,4 +1,4 @@
-import type { SelectWorldCardProps } from "@/types";
+import type { SelectWorldCardProps } from "./types";
 import grassBlock from "@/assets/images/grass_block_2d_70X70.jpeg";
 import playIcon from "@/assets/images/mc_play_icon.png";
 import { MinecraftText } from "@/components/ui";

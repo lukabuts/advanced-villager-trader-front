@@ -19,19 +19,6 @@ export interface LoadingScreenProps {
   fullScreen?: boolean;
 }
 
-export interface SelectWorldCardProps {
-  world: World;
-  isSelected: boolean;
-  onSelect: () => void;
-  navigateToWorld: (worldId: World["id"]) => void;
-}
-
-export interface SelectWorldBtnsProps {
-  selectedWorld: World | null;
-  navigateToWorld: (worldId: World["id"] | null) => void;
-  clearSelection: () => void;
-}
-
 export interface EditWorldCardProps {
   defaultValue: string;
   updateName: (name: string) => void;

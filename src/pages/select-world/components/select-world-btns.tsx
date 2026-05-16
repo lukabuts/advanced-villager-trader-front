@@ -1,5 +1,5 @@
 import { useGoBack } from "@/hooks";
-import type { SelectWorldBtnsProps } from "@/types";
+import type { SelectWorldBtnsProps } from "./types";
 import { useModalStore } from "@/store";
 import {
   CreateWorldModal,
