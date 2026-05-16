@@ -18,6 +18,7 @@ export interface Villager {
   killedAt?: number;
   trades: Trade[];
   createdAt: number;
+  isCured: boolean;
 }
 
 export type VillagerStatus = "alive" | "dead";

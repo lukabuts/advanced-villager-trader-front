@@ -1,4 +1,3 @@
-// src/store/worldStore.ts
 import { LOCAL_STORAGE_KEYS } from "@/constants";
 import type { Villager, TradingHall, World, Trade, WorldStore } from "@/types";
 import { create } from "zustand";

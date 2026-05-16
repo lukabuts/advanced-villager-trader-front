@@ -12,7 +12,7 @@ export function WorldModalWrapper({
 }: WorldModalWrapperProps) {
   const { close } = useModalStore();
   return (
-    <div className="px-6 py-4 gap-4 flex flex-col bg-panel border-2 border-border max-w-md mx-auto">
+    <div className="dark px-6 py-4 gap-4 flex flex-col bg-panel border-2 border-border max-w-md mx-auto">
       <div className=" border-b border-border font-mojangles text-white flex items-center justify-between pb-4">
         <p className="text-lg">{title}</p>
         <button
@@ -22,7 +22,7 @@ export function WorldModalWrapper({
           <XIcon size={20} />
         </button>
       </div>
-      <div> {children}</div>
+      <div className=" text-content-dim font-mojangles"> {children}</div>
       <div className="flex gap-2">
         <MinecraftButton onClick={onCancel} label="Cancel" />
         <MinecraftButton label={label} onClick={onSubmit} />

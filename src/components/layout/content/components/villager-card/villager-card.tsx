@@ -2,6 +2,7 @@ import { VillagerIcon } from "@/assets/icons";
 import { PROF_COLORS, PROF_EMOJI } from "@/constants";
 import type { VillagerCardProps } from "../types";
 import { TradeCard, VillagerCardBtns } from "./components";
+import { CuredBadge } from "./components/cured-badge";
 
 export function VillagerCard({ world, villager, search }: VillagerCardProps) {
   const buyTrades = villager.trades.filter((t) => t.type === "buy");
@@ -20,11 +21,14 @@ export function VillagerCard({ world, villager, search }: VillagerCardProps) {
           color={PROF_COLORS[villager.profession]}
         />
         <div className="flex-1 min-w-0">
-          <div className="text-sm font-semibold text-content wrap-break-word mb-1">
+          <div className="text-sm font-semibold text-content wrap-break-word mb-1 capitalize">
             {villager.name}
           </div>
-          <div className="text-13 text-emerald-dark">
-            {PROF_EMOJI[villager.profession]} {villager.profession}
+          <div className="flex items-center gap-2">
+            <span className="text-13 text-emerald-dark capitalize">
+              {PROF_EMOJI[villager.profession]} {villager.profession}
+            </span>{" "}
+            {villager.isCured && <CuredBadge />}
           </div>
           {villager.notes && (
             <div className="text-13 text-content-muted mt-1 line-clamp-2">

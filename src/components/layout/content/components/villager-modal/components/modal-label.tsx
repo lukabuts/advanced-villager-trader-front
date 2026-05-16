@@ -6,7 +6,7 @@ export function ModalLabel({ htmlFor, children, className }: ModalLabelProps) {
     <label
       htmlFor={htmlFor}
       className={cn(
-        "uppercase text-xs font-semibold text-content-dim tracking-wider w-fit",
+        "uppercase text-xs font-semibold text-content-dim tracking-wider w-fit cursor-pointer select-none",
         className,
       )}
     >

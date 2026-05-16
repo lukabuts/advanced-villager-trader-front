@@ -10,3 +10,7 @@ export interface TradeCardProps {
   trade: Trade;
   search: string;
 }
+
+export interface CuredBadgeProps {
+  className?: string;
+}
