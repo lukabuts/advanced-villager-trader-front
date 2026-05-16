@@ -1,6 +1,6 @@
 import { MinecraftButton, WorldModalWrapper } from "@/components/ui";
 import { LOCAL_STORAGE_KEYS } from "@/constants";
-import { useModalStore, useNotificationStore } from "@/store";
+import { useModalStore, useNotificationStore, useWorldStore } from "@/store";
 import { CopyIcon, EditIcon } from "lucide-react";
 import { useRef, useState } from "react";
 import type { ManageDataModalProps } from "./types";
@@ -11,10 +11,10 @@ export function ManageDataModal({
 }: ManageDataModalProps) {
   const data = localStorage.getItem(LOCAL_STORAGE_KEYS.WORLDS);
   const parsedData = data ? JSON.parse(data) : null;
-  const jsonString = JSON.stringify(parsedData, null, 2);
+  const jsonString = parsedData ? JSON.stringify(parsedData, null, 2) : "";
 
   const [textareaValue, setTextareaValue] = useState(
-    initialValue ?? jsonString ?? "No world data found.",
+    initialValue ?? jsonString ?? "",
   );
   const [isCopied, setIsCopied] = useState(false);
   const [isEditing, setIsEditing] = useState(initialEditing);
@@ -103,13 +103,21 @@ export function ManageDataModal({
 
   function handleSaving() {
     try {
-      const parsed = JSON.parse(textareaValue);
-      localStorage.setItem(LOCAL_STORAGE_KEYS.WORLDS, JSON.stringify(parsed));
+      if (!textareaValue) {
+        localStorage.setItem(
+          LOCAL_STORAGE_KEYS.WORLDS,
+          JSON.stringify({ state: { worlds: [] } }),
+        );
+      } else {
+        const parsed = JSON.parse(textareaValue);
+        localStorage.setItem(LOCAL_STORAGE_KEYS.WORLDS, JSON.stringify(parsed));
+      }
+
+      useWorldStore.persist.rehydrate();
       close();
       show("World data saved successfully!");
     } catch (err) {
       console.error("Error parsing JSON:", err);
-      showMessage("error", "Invalid JSON format.");
     }
   }
 
@@ -118,6 +126,14 @@ export function ManageDataModal({
       title="Manage World Data"
       onCancel={close}
       onSubmit={() => {
+        if (textareaValue) {
+          try {
+            JSON.parse(textareaValue);
+          } catch {
+            showMessage("error", "Invalid JSON format.");
+            return;
+          }
+        }
         open(
           <WorldModalWrapper
             title="Confirm Save"
@@ -132,7 +148,7 @@ export function ManageDataModal({
             onSubmit={handleSaving}
             label="Yes, Save"
           >
-            <span className="font-mojangles">Save Changes?</span>
+            <span>Save Changes?</span>
           </WorldModalWrapper>,
         );
       }}
@@ -151,8 +167,9 @@ export function ManageDataModal({
           onChange={handleFileChange}
         />
         <textarea
-          className="w-full h-48 p-2 bg-black/20 border border-gray-600 rounded resize-none text-sm font-mojangles min-scrollbar"
+          className="w-full h-48 p-2 bg-black/20 border border-gray-600 rounded resize-none text-sm min-scrollbar"
           value={textareaValue}
+          placeholder="Insert Data Here..."
           onChange={(e) => setTextareaValue(e.target.value)}
           readOnly={!isEditing}
           disabled={!isEditing}
@@ -189,7 +206,7 @@ export function ManageDataModal({
         {/* Message */}
         {message && (
           <div
-            className={`mt-4 p-2 rounded absolute z-10 -top-3 right-1/2 transform translate-x-1/2 text-center text-xs font-mojangles animate-fade-in bg-bg-3 border  ${
+            className={`mt-4 p-2 rounded absolute z-10 -top-3 right-1/2 transform translate-x-1/2 text-center text-xs animate-fade-in bg-bg-3 border  ${
               message.type === "success"
                 ? "border-emerald-dark text-emerald"
                 : " text-red border-red-dark"

@@ -12,6 +12,9 @@
   --emerald-dark: #355a40;
   --emerald-light: #e8f2ec;
   --gold: #c0962a;
+  --cured-bg: #004445;
+  --cured-border: #2c786c;
+  --cured-text: #f8b400;
 
   --red: #9b4040;
   --red-dark: #7a3030;
@@ -59,6 +62,9 @@
   --color-content-dim: var(--content-dim);
   --color-content-muted: var(--content-muted);
   --color-mc: var(--mc);
+  --color-cured-bg: var(--cured-bg);
+  --color-cured-border: var(--cured-border);
+  --color-cured-text: var(--cured-text);
   --animate-fade-in: fadeIn 0.3s ease-out forwards;
   --radius-2.5: 10px;
   --text-13: 13px;
@@ -195,7 +201,7 @@
     @apply bg-panel border border-border rounded-[10px] p-4;
   }
   .panel-title {
-    @apply font-serif text-[13px] font-semibold text-content
+    @apply font-serif text-13 font-semibold text-content
            mb-3 pb-2 border-b border-border-light flex items-center gap-1.5;
   }
 
@@ -210,46 +216,6 @@
            font-sans text-sm px-3 py-2 outline-none transition-all duration-150
            focus:border-emerald focus:ring-2 focus:ring-emerald/15
            placeholder:text-content-muted;
-  }
-  .form-label {
-    @apply text-[11px] font-semibold text-content-dim uppercase tracking-wider;
-  }
-
-  .chip {
-    @apply font-sans text-xs font-medium px-2.5 py-1 rounded-full
-           border border-border bg-bg-2 text-content-dim cursor-pointer
-           transition-all duration-150
-           hover:border-emerald hover:text-emerald hover:bg-emerald-light;
-  }
-  .chip-active {
-    @apply bg-emerald border-emerald-dark text-white;
-  }
-
-  .filter-tag {
-    @apply inline-flex items-center gap-1.5 bg-panel border border-border
-           rounded-md px-2.5 py-1 text-xs text-content-dim;
-  }
-
-  .stat-row {
-    @apply flex justify-between items-center py-1.5
-           border-b border-border-light last:border-0 text-sm;
-  }
-
-  .trade-item {
-    @apply flex items-center justify-between gap-2 px-2 py-1.5
-           bg-bg-2 rounded-md border border-border-light text-sm;
-  }
-
-  .notification {
-    @apply fixed bottom-5 right-5 bg-panel border border-emerald rounded-lg
-           px-4 py-3 text-[13px] font-medium text-emerald-dark z-[300]
-           max-w-[280px] translate-x-full transition-transform duration-300;
-  }
-  .notification-show {
-    @apply translate-x-0;
-  }
-  .notification-error {
-    @apply border-red text-red;
   }
 
   .tilted-text {
@@ -284,5 +250,45 @@
       grid-template-columns: 1fr;
       max-height: calc(-145px + 100vh);
     }
+  }
+
+  /* Cured villager checkbox */
+  input[type="checkbox"]#isCured {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    background-color: var(--color-bg-2);
+    cursor: pointer;
+    position: relative;
+    transition:
+      background-color 0.15s,
+      border-color 0.15s;
+    flex-shrink: 0;
+  }
+
+  input[type="checkbox"]#isCured:checked {
+    background-color: var(--color-cured-bg);
+    border-color: var(--color-cured-border);
+  }
+
+  input[type="checkbox"]#isCured:checked::after {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 1px;
+    width: 5px;
+    height: 9px;
+    border: 2px solid var(--color-cured-text);
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg);
+  }
+
+  input[type="checkbox"]#isCured:focus-visible {
+    outline: 1px solid var(--color-cured-border);
+    outline-offset: 2px;
   }
 }

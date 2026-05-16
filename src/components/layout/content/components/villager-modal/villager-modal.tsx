@@ -15,6 +15,7 @@ export function VillagerModal({ world, villager, type }: VillagerModalProps) {
   const [customName, setCustomName] = useState(villager?.name || "");
   const [notes, setNotes] = useState(villager?.notes || "");
   const [trades, setTrades] = useState<Trade[]>(villager?.trades || []);
+  const [isCured, setIsCured] = useState(villager?.isCured || false);
 
   const { addVillager, updateVillager } = useWorldStore();
   const { close } = useModalStore();
@@ -24,6 +25,7 @@ export function VillagerModal({ world, villager, type }: VillagerModalProps) {
     setCustomName("");
     setNotes("");
     setTrades([]);
+    setIsCured(false);
   }
 
   function handleAddVillager() {
@@ -34,6 +36,7 @@ export function VillagerModal({ world, villager, type }: VillagerModalProps) {
       name: villagerName,
       notes,
       trades,
+      isCured,
     });
     close();
     show(`Villager "${villagerName.slice(0, 12)}" added successfully`);
@@ -114,6 +117,16 @@ export function VillagerModal({ world, villager, type }: VillagerModalProps) {
             placeholder="e.g. max level, near entrance..."
             value={notes}
             onChange={(e) => setNotes(limitNameLength(e.target.value))}
+          />
+        </div>
+        <div className="flex items-center gap-1.25">
+          <ModalLabel htmlFor="isCured">Cured (optional)</ModalLabel>
+          <input
+            type="checkbox"
+            name="isCured"
+            id="isCured"
+            checked={isCured}
+            onChange={(e) => setIsCured(e.target.checked)}
           />
         </div>
         <SelectTrades

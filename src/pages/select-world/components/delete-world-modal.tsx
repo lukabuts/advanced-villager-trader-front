@@ -21,7 +21,7 @@ export function DeleteWorldModal({
       onSubmit={handleDelete}
       label="Delete"
     >
-      <p className="font-mojangles">
+      <p>
         Are you sure you want to delete{" "}
         <span className="text-white">{selectedWorld?.name}</span>? This action
         cannot be undone.
