@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { ROUTES } from "@/constants/routes";
 import { AppLayout, GameMenuLayout } from "@/components/layout";
-import { Singleplayer, Home, NotFound, SelectWorld } from "./config";
+import { Singleplayer, Home, NotFound, SelectWorld } from "@/pages";
 
 export const router = createBrowserRouter([
   // Pages WITHOUT header
